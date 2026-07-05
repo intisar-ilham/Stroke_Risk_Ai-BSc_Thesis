@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrokeRisk AI - Predictive Health Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="dark-theme">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <header class="app-header">
+        <div class="logo">
+            <i class="fa-solid fa-heart-pulse logo-icon"></i>
+            <h1>StrokeRisk <span>AI</span></h1>
+        </div>
+        <div class="tagline">Clinical-grade Predictive Intelligence Engine</div>
+    </header>
+
+    <main class="dashboard-container">
+        <!-- Input Form Section -->
+        <section class="form-card glass-panel">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-user-doctor"></i> Patient Profile Entry</h2>
+                <p>Input patient lifestyle and clinical metrics below</p>
+            </div>
+            
+            <form id="patient-form" novalidate>
+                <!-- Group 1: Demographics -->
+                <div class="form-group-title">Demographics</div>
+                <div class="form-grid">
+                    <div class="input-field">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="" disabled selected>Select gender</option>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="error-msg">Please select gender.</span>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="age">Age (years)</label>
+                        <input type="number" id="age" name="age" min="1" max="120" placeholder="e.g. 65" required>
+                        <span class="error-msg">Age must be between 1 and 120.</span>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="ever_married">Ever Married?</label>
+                        <select id="ever_married" name="ever_married" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <span class="error-msg">Please select marital status.</span>
+                    </div>
+                </div>
+
+                <!-- Group 2: Clinical Metrics -->
+                <div class="form-group-title">Clinical Metrics</div>
+                <div class="form-grid">
+                    <div class="input-field">
+                        <label for="avg_glucose_level">Avg Glucose Level (mg/dL)</label>
+                        <input type="number" id="avg_glucose_level" name="avg_glucose_level" step="0.1" min="40" max="350" placeholder="e.g. 105.5" required>
+                        <span class="error-msg">Glucose level must be between 40 and 350.</span>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="bmi">BMI (Body Mass Index)</label>
+                        <input type="number" id="bmi" name="bmi" step="0.1" min="10" max="75" placeholder="e.g. 28.4" required>
+                        <span class="error-msg">BMI must be between 10 and 75.</span>
+                    </div>
+
+                    <div class="input-field select-boxes">
+                        <label>Hypertension</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="hypertension" value="1">
+                                <span>Yes</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="hypertension" value="0" checked>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-field select-boxes">
+                        <label>Heart Disease</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="heart_disease" value="1">
+                                <span>Yes</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="heart_disease" value="0" checked>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 3: Lifestyle & Environment -->
+                <div class="form-group-title">Lifestyle & Environment</div>
+                <div class="form-grid">
+                    <div class="input-field">
+                        <label for="work_type">Work Type</label>
+                        <select id="work_type" name="work_type" required>
+                            <option value="" disabled selected>Select work type</option>
+                            <option value="Private">Private</option>
+                            <option value="Self-employed">Self-employed</option>
+                            <option value="Govt_job">Govt Job</option>
+                            <option value="children">Children</option>
+                            <option value="Never_worked">Never Worked</option>
+                        </select>
+                        <span class="error-msg">Please select work type.</span>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="Residence_type">Residence Type</label>
+                        <select id="Residence_type" name="Residence_type" required>
+                            <option value="" disabled selected>Select residence type</option>
+                            <option value="Urban">Urban</option>
+                            <option value="Rural">Rural</option>
+                        </select>
+                        <span class="error-msg">Please select residence type.</span>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="smoking_status">Smoking Status</label>
+                        <select id="smoking_status" name="smoking_status" required>
+                            <option value="" disabled selected>Select status</option>
+                            <option value="never smoked">Never Smoked</option>
+                            <option value="formerly smoked">Formerly Smoked</option>
+                            <option value="smokes">Currently Smokes</option>
+                            <option value="Unknown">Unknown / Refused</option>
+                        </select>
+                        <span class="error-msg">Please select smoking status.</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <span class="btn-text">Generate Health Analytics</span>
+                    <i class="fa-solid fa-microchip btn-icon"></i>
+                </button>
+            </form>
+        </section>
+
+        <!-- Prediction Results & Explainability Section -->
+        <section class="results-card glass-panel">
+            <!-- Empty state -->
+            <div id="results-empty-state" class="empty-state">
+                <i class="fa-solid fa-radar-pulse pulse-icon"></i>
+                <h3>Awaiting Patient Data</h3>
+                <p>Submit the patient profile on the left to initiate machine learning inference and compile predictions.</p>
+            </div>
+
+            <!-- Loading state -->
+            <div id="results-loading-state" class="loading-state hidden">
+                <div class="spinner"></div>
+                <h3>Performing Multi-Model Inference</h3>
+                <p>Computing scaling, categorical encoding, and model classification probabilities...</p>
+            </div>
+
+            <!-- Results state -->
+            <div id="results-content-state" class="results-content hidden">
+                <div class="results-header">
+                    <h2><i class="fa-solid fa-chart-line"></i> Risk Analytics Summary</h2>
+                </div>
+
+                <!-- Score breakdown cards -->
+                <div class="model-cards-grid" id="model-cards-container">
+                    <!-- Cards will be populated dynamically -->
+                </div>
+
+
+
+                <!-- Explainability Section -->
+                <div class="explainability-section">
+                    <div class="explainability-header">
+                        <h3><i class="fa-solid fa-wand-magic-sparkles"></i> LIME Patient-Specific Explanation</h3>
+                    </div>
+                    <p class="explain-text">The chart below displays feature weights computed by Local Interpretable Model-agnostic Explanations (LIME). Longer bars represent features that played a stronger role in driving this prediction.</p>
+                    
+                    <div id="lime-loading" class="lime-spinner-container hidden">
+                        <div class="spinner small"></div>
+                        <span>Calculating LIME local feature weights...</span>
+                    </div>
+
+                    <div class="chart-container explanation-chart-container" id="explanation-chart-wrapper">
+                        <canvas id="explanationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Custom JS -->
+    <script src="main.js"></script>
+</body>
+</html>
