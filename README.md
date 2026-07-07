@@ -179,19 +179,13 @@ This application was developed as part of a BSc thesis:
 | Field | Details |
 |---|---|
 | Title | Machine Learning-Based Stroke Risk Prediction with Explainable AI: A Comparative Analysis of SHAP and LIME |
-| Author | Intisar Ilham (ID: 222-35-1161) |
-| Supervisor | Dr. Md. Fazla Elahe |
-| Position | Assistant Professor & Associate Head, Dept. of SWE, DIU |
+| Author | Intisar Ilham  |
 | Institution | Daffodil International University |
 | Department | Software Engineering (Major in Data Science) |
 | Year | 2026 |
+| Supervisor | Dr. Md. Fazla Elahe |
+| Position | Assistant Professor & Associate Head, Dept. of SWE, DIU |
+
 
 ---
 
----
-
-<div align="center">
-
-**Daffodil International University — 2026**
-
-</div>
