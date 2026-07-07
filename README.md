@@ -1,88 +1,197 @@
-# StrokeRisk AI: Predictive Health Dashboard
+# 🧠 StrokeRisk AI — BSc Thesis Deployment
 
-![StrokeRisk AI](https://img.shields.io/badge/Status-Active-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.9+-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.5.2-F7931E)
-
-StrokeRisk AI is a full-stack, clinical-grade predictive intelligence engine. It leverages a trained **Random Forest Machine Learning Model** to assess the risk of stroke in patients based on demographic, lifestyle, and clinical metrics. 
-
-The application features a high-performance **FastAPI backend** for real-time inference and a premium, **glassmorphic Vanilla CSS/JS frontend** for an immersive user experience. It also features **LIME (Local Interpretable Model-agnostic Explanations)** to provide patient-specific interpretability, showing exactly *why* a specific prediction was made.
+> A machine learning-powered web application for stroke risk prediction with real-time explainability through SHAP and LIME. Built as part of a Bachelor of Science thesis at **Daffodil International University**.
 
 ---
 
-## 🌟 Key Features
+## 📌 Overview
 
-- **High-Accuracy Inference**: Uses a highly optimized Random Forest Classifier to predict stroke probability.
-- **Explainable AI (XAI)**: Integrates LIME to generate localized feature-weight charts, explaining which patient metrics increased or decreased their stroke risk.
-- **Premium UI/UX**: A dark-themed, glassmorphic interface with micro-animations, neon glows, and dynamic Chart.js visualizations.
-- **Real-Time Validation**: Client-side form validation ensures data integrity before sending to the prediction engine.
-- **Production Ready**: Configured for immediate cloud deployment on platforms like Render.
+**StrokeRisk AI** is a clinical decision support tool that predicts a patient's stroke risk based on demographic, clinical, and lifestyle data. It goes beyond simple prediction by providing transparent, interpretable explanations through two leading Explainable AI techniques — **SHAP** and **LIME** — helping clinicians understand *why* a prediction was made, not just *what* it is.
 
 ---
 
-## 🏗️ Architecture
+## 🖥️ Interface Preview
 
-- **Frontend**: HTML5, Vanilla CSS3 (Glassmorphism), Vanilla JavaScript, Chart.js, FontAwesome.
-- **Backend**: Python, FastAPI, Uvicorn.
-- **Machine Learning**: Scikit-Learn, Pandas, Numpy, Joblib, LIME.
+| Patient Profile Entry | Risk Analytics Summary |
+|---|---|
+| Input demographics, clinical metrics, and lifestyle data | View stroke probability, risk level, and AI interpretability charts |
+
+The application features a clean two-panel dark-themed interface:
+- **Left Panel** — Patient Profile Entry with demographics, clinical metrics, and lifestyle inputs
+- **Right Panel** — Risk Analytics Summary with stroke probability, risk level badge, and SHAP/LIME toggle charts
 
 ---
 
-## 🚀 How to Run Locally
+## ✨ Features
 
-### 1. Prerequisites
-Ensure you have Python installed (3.9 or higher recommended). 
+- 🔮 **Real-time stroke risk prediction** using a trained Random Forest model
+- 📊 **SHAP explanations** — Global feature importance across all predictions
+- 🔍 **LIME explanations** — Local instance-level feature influence for individual patients
+- 🔄 **SHAP vs LIME toggle** — Switch between explanation methods instantly
+- 🏥 **Clinical-grade UI** — Designed for healthcare professional use
+- ⚡ **Instant predictions** — Fast results with feature influence visualization
+- 🎯 **Risk Level Badge** — Clear HIGH RISK / LOW RISK classification
 
-### 2. Install Dependencies
-Navigate to the project root directory and install the required packages:
+---
+
+## 🧪 Model Performance
+
+| Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
+|---|---|---|---|---|---|
+| Logistic Regression | 0.7953 | 0.7778 | 0.8244 | 0.8004 | 0.8578 |
+| SVM | 0.8369 | 0.7956 | 0.9050 | 0.8468 | 0.8969 |
+| XGBoost | 0.9378 | 0.9248 | 0.9525 | 0.9384 | 0.9872 |
+| **Random Forest** ✅ | **0.9398** | **0.9119** | **0.9731** | **0.9415** | **0.9876** |
+
+> Random Forest was selected as the final model due to its superior recall (97.31%) — the most critical metric in clinical stroke detection.
+
+---
+
+## 📂 Dataset
+
+| Property | Details |
+|---|---|
+| Source | Healthcare Dataset Stroke Data — Kaggle |
+| Total Records | 5,110 patient records |
+| Features | 11 clinical and demographic variables |
+| Target Variable | Stroke occurrence (0 = No, 1 = Yes) |
+| Class Imbalance | 1:19 (stroke vs non-stroke) |
+| Imbalance Handling | SMOTE applied — balanced to 1:1 |
+
+---
+
+## 🔬 XAI Methods
+
+### SHAP (SHapley Additive exPlanations)
+- Grounded in cooperative game theory
+- Provides globally consistent and mathematically sound feature importance
+- Shows how each feature contributes toward or against the stroke prediction
+- Used for population-level global insights
+
+### LIME (Local Interpretable Model-agnostic Explanations)
+- Builds a simple local surrogate model around each individual prediction
+- Provides instance-level feature influence for specific patients
+- Ideal for explaining individual patient predictions to clinicians
+- Used for patient-level local insights
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|---|---|
+| Backend | Python, Flask |
+| ML Models | Scikit-learn, XGBoost |
+| XAI | SHAP, LIME |
+| Class Imbalance | Imbalanced-learn (SMOTE) |
+| Feature Selection | Chi-Square Test, Correlation Matrix |
+| Frontend | HTML, CSS, JavaScript |
+| Visualization | Matplotlib, Plotly |
+
+---
+
+## 🚀 Getting Started
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/yourusername/strokerisk-ai.git
+cd strokerisk-ai
+```
+
+**2. Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Start the Server
-Run the FastAPI backend using Uvicorn:
+**3. Run the application**
 ```bash
-python -m uvicorn backend:app --host 127.0.0.1 --port 8000
+python app.py
 ```
 
-### 4. Access the Dashboard
-Open your web browser and navigate to:
+**4. Open in your browser**
 ```
 http://127.0.0.1:8000
 ```
 
 ---
 
-## ☁️ Deployment (Render)
+## 📁 Project Structure
 
-This repository is pre-configured for deployment on [Render](https://render.com/).
-
-1. Push this repository to GitHub.
-2. In your Render Dashboard, create a new **Web Service**.
-3. Connect the GitHub repository.
-4. Set the build command:
-   ```bash
-   pip install -r requirements.txt
-   ```
-5. Set the start command:
-   ```bash
-   uvicorn backend:app --host 0.0.0.0 --port $PORT
-   ```
-6. Deploy!
-
----
-
-## 📊 Dataset & Preprocessing
-
-The model expects the following preprocessing pipeline, which is executed in real-time by the FastAPI server before inference:
-- **Numerical Features** (`age`, `avg_glucose_level`, `bmi`): Scaled using `StandardScaler`.
-- **Categorical Features** (`gender`, `ever_married`, `work_type`, `Residence_type`, `smoking_status`): Integer-encoded using `LabelEncoder`.
-- Missing values in `bmi` are dynamically handled using the training set mean.
-
-*(Note: The `healthcare-dataset-stroke-data.csv` file is included in the repository solely for initializing the LIME explainer baseline distributions).*
+```
+strokerisk-ai/
+│
+├── Models/
+│   ├── label_encoders.pkl        # Label encoders for categorical features
+│   ├── random_forest_model.pkl   # Trained Random Forest model
+│   └── scaler.pkl                # StandardScaler for feature normalization
+│
+├── Screenshots/                  # Application screenshots
+│
+├── static/
+│   ├── index.css                 # Application styling
+│   ├── index.html                # Main UI template
+│   └── main.js                   # Frontend JavaScript logic
+│
+├── .gitignore
+├── README.md
+├── backend.py                    # Flask application entry point
+├── fit_preprocessors.py          # Preprocessing pipeline script
+├── healthcare-dataset-stroke-data.csv  # Dataset
+└── requirements.txt              # Python dependencies
+```
 
 ---
 
-## 📄 License
-This project is created for educational and research purposes. Please consult medical professionals for real-world clinical applications.
+## 📊 How It Works
+
+```
+Patient Input
+     ↓
+Preprocessing (Encoding + Scaling)
+     ↓
+Random Forest Model
+     ↓
+Stroke Risk Prediction (Probability + Risk Level)
+     ↓
+SHAP & LIME Explanation Generation
+     ↓
+Visual Feature Influence Display
+```
+
+---
+
+## 🔑 Key Research Findings
+
+- **Random Forest** achieved the best overall performance with **93.98% accuracy** and **97.31% recall**
+- **Age** was identified as the most dominant stroke risk predictor by both SHAP and LIME
+- **BMI** and **Average Glucose Level** followed as the second and third most influential features
+- **SHAP** is better suited for global population-level insights
+- **LIME** provides more meaningful individual patient-level explanations
+- Both methods together offer a more complete and clinically trustworthy picture of stroke risk prediction
+- **Hypertension** and **Heart Disease** were underrepresented in SHAP's global rankings despite their clinical significance — a key finding of this study
+
+---
+
+## 👨‍🎓 Research Context
+
+This application was developed as part of a BSc thesis:
+
+| Field | Details |
+|---|---|
+| Title | Machine Learning-Based Stroke Risk Prediction with Explainable AI: A Comparative Analysis of SHAP and LIME |
+| Author | Intisar Ilham (ID: 222-35-1161) |
+| Supervisor | Dr. Md. Fazla Elahe |
+| Position | Assistant Professor & Associate Head, Dept. of SWE, DIU |
+| Institution | Daffodil International University |
+| Department | Software Engineering (Major in Data Science) |
+| Year | 2026 |
+
+---
+
+---
+
+<div align="center">
+
+**Daffodil International University — 2026**
+
+</div>
